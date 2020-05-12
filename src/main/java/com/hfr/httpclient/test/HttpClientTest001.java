@@ -1,6 +1,5 @@
 package com.hfr.httpclient.test;
 
-import com.hfr.bean.Detail;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -19,8 +18,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class HttpClientTest001 {
 
@@ -52,10 +49,10 @@ public class HttpClientTest001 {
 
                     if (detail_link != null && !detail_link.equals("")) {
                         detail_link = "http://www.yaggzy.org.cn" + detail_link;
-                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
+//                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
 
                         //解析详情页
-
+                        getDetail(detail_link);
                     }
                 }
 
@@ -65,7 +62,7 @@ public class HttpClientTest001 {
                     int totalNum = Integer.parseInt(totalNumStr);
                     //从第二页开始post请求翻页
                     for(int i = 2; i <= totalNum; i++){
-                        doPostList(i);
+                        //doPostList(i);
                     }
                 }
             }
@@ -127,7 +124,10 @@ public class HttpClientTest001 {
 
                     if (detail_link != null && !detail_link.equals("")) {
                         detail_link = "http://www.yaggzy.org.cn" + detail_link;
-                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
+//                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
+
+                        //解析详情页
+                        getDetail(detail_link);
                     }
                 }
             }
@@ -166,29 +166,12 @@ public class HttpClientTest001 {
                 //详情页
                 Document doc = Jsoup.parse(page);
 
-                String detail_title = doc.select("span#lblTitle").text();
+                String detail_title = doc.select("div.table_title").text();
+                String detail_content = doc.select("div.content_all_nr > table").get(0).html();
 
-                System.out.println(detail_title);
+                System.out.println(detail_title + " - " + detail_content);
 
-//                String time = doc.select("#content > div > div.recutit_meta > ul > li:nth-child(3)").text();
-//                String detail_time = time.substring(time.indexOf("：") + 1);
-//
-//                String detail_content = doc.select("#content > div > div.desc_intro.desc_box").html();
-//
-//
-//                String id = detailUrl.substring(detailUrl.lastIndexOf("=") + 1);
-//
-//                Detail detail = map.get(id);
-//                detail.setCREATE_BY("洪福锐");
-//                detail.setDETAIL_CONTENT(detail_content);
-//                detail.setDETAIL_LINK(detailUrl);
-//                detail.setDETAIL_TITLE(detail_title);
-//                detail.setSOURCE_NAME("联投置业");
-//
 //                //入库
-//                if (dao.findDetailById(id) == null) {
-//                    dao.saveDetail(detail);
-//                }
             }
         } catch (Exception e) {
             e.printStackTrace();
