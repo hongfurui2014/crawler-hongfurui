@@ -49,8 +49,6 @@ public class HttpClientTest001 {
 
                     if (detail_link != null && !detail_link.equals("")) {
                         detail_link = "http://www.yaggzy.org.cn" + detail_link;
-//                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
-
                         //解析详情页
                         getDetail(detail_link);
                     }
@@ -169,7 +167,7 @@ public class HttpClientTest001 {
                 String detail_title = doc.select("div.table_title").text();
                 String detail_content = doc.select("div.content_all_nr > table").get(0).html();
 
-                System.out.println(detail_title + " - " + detail_content);
+                System.out.println(detail_title);
 
 //                //入库
             }
