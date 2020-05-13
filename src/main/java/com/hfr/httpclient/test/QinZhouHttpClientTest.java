@@ -61,7 +61,7 @@ public class QinZhouHttpClientTest {
         try {
             // 由客户端执行(发送)Get请求
             response = httpClient.execute(httpPost);
-            if(response.getStatusLine().getStatusCode() == 200){
+            if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity responseEntity = response.getEntity();
                 if (responseEntity != null) {
 
@@ -76,13 +76,13 @@ public class QinZhouHttpClientTest {
         } finally {
             // 释放资源
             try {
-            if (response != null) {
+                if (response != null) {
                     response.close();
 
-            }
-            if (httpClient != null) {
+                }
+                if (httpClient != null) {
                     httpClient.close();
-            }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

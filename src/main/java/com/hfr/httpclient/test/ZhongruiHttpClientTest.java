@@ -21,7 +21,7 @@ public class ZhongruiHttpClientTest {
         getList("http://www.chiwayland.com/index.php?m=content&c=index&a=lists&catid=230&page=1");
     }
 
-    public static void getList(String listUrl){
+    public static void getList(String listUrl) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet(listUrl);
 
@@ -39,11 +39,11 @@ public class ZhongruiHttpClientTest {
                 Document doc = Jsoup.parse(page);
                 Elements elements = doc.select("div.zhaob");
 
-                for(Element e : elements){
+                for (Element e : elements) {
                     String title = e.select("a").text();
                     String href = "http://www.chiwayland.com" + e.select("a").attr("href");
                     String time = e.select("div.date").get(0).text();
-                    String date = time.substring(time.lastIndexOf("：")+1);
+                    String date = time.substring(time.lastIndexOf("：") + 1);
 
                     System.out.println(title + " - " + href + " - " + date);
 
@@ -79,7 +79,7 @@ public class ZhongruiHttpClientTest {
         }
     }
 
-    public static void getDetail(String detailUrl){
+    public static void getDetail(String detailUrl) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet(detailUrl);
 

@@ -41,12 +41,12 @@ public class DetailDao {
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jdbc.close(connection, ps, rs);
         }
     }
 
-    public Detail findDetailById(String id) {
+    public Detail findDetailById(String id) throws Exception {
         Detail d = new Detail();
 
         connection = jdbc.getConnection();
@@ -60,7 +60,6 @@ public class DetailDao {
 
             rs = ps.executeQuery();
 
-            //将结果集遍历显示出来
             while (rs.next()) {
                 d.setID(rs.getString("ID"));
 //                d.setSOURCE_NAME(rs.getString("SOURCE_NAME"));
@@ -72,17 +71,17 @@ public class DetailDao {
 //                d.setLIST_TITLE(rs.getString("LIST_TITLE"));
 //                d.setCREATE_TIME(rs.getTimestamp("CREATE_TIME"));
             }
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jdbc.close(connection, ps, rs);
         }
 
         //结果集为空
-        if(d.getID() == null){
+        if (d.getID() == null) {
             return null;
         }
-
         return d;
     }
 }

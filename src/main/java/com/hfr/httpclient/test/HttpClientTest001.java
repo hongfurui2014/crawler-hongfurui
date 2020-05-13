@@ -58,10 +58,10 @@ public class HttpClientTest001 {
 
                 //获取总页数
                 String totalNumStr = doc.select("div.mmggxlh a:nth-last-child(2)").text();
-                if(totalNumStr != null){
+                if (totalNumStr != null) {
                     int totalNum = Integer.parseInt(totalNumStr);
                     //从第二页开始post请求翻页
-                    for(int i = 2; i <= totalNum; i++){
+                    for (int i = 2; i <= totalNum; i++) {
                         //doPostList(i);
                     }
                 }
