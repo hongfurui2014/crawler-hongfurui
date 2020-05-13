@@ -19,11 +19,6 @@
             <artifactId>jsoup</artifactId>
             <version>1.12.1</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>fastjson</artifactId>-->
-            <!--<version>1.2.62</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-core</artifactId>
@@ -39,10 +34,5 @@
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-java</artifactId>-->
-            <!--<version>3.141.59</version>-->
-        <!--</dependency>-->
     </dependencies>
 </project>
