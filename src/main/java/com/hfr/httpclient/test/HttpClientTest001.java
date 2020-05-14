@@ -60,7 +60,7 @@ public class HttpClientTest001 {
                     int totalNum = Integer.parseInt(totalNumStr);
                     //从第二页开始post请求翻页
                     for (int i = 2; i <= totalNum; i++) {
-                        //doPostList(i);
+                        doPostList(i);
                     }
                 }
             }
@@ -89,19 +89,13 @@ public class HttpClientTest001 {
             httpClient = HttpClientBuilder.create().build();
             HttpPost httpPost = new HttpPost("http://www.yaggzy.org.cn/jyxx/jsgcZbgg");
             httpPost.addHeader("User-Agent",
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36");
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36");
             httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList();
 
             params.add(new BasicNameValuePair("currentPage", curNum + ""));
-
-            // 创建form表单对象
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(params, "utf-8");
-            formEntity.setContentType("application/x-www-form-urlencoded");
-
-            // 把表单对象设置到httpPost中
-            httpPost.setEntity(formEntity);
+            httpPost.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
 
             response = httpClient.execute(httpPost);
 
@@ -111,6 +105,8 @@ public class HttpClientTest001 {
                 String page = EntityUtils.toString(responseEntity);
 
                 Document doc = Jsoup.parse(page);
+
+                System.out.println("----------------------------");
 
                 //解析获取标题、时间、链接
                 Elements elements = doc.select("li.clearfloat tr");
@@ -122,8 +118,6 @@ public class HttpClientTest001 {
 
                     if (detail_link != null && !detail_link.equals("")) {
                         detail_link = "http://www.yaggzy.org.cn" + detail_link;
-//                        System.out.println(detail_link + " - " + list_title + " - " + page_time);
-
                         //解析详情页
                         getDetail(detail_link);
                     }
