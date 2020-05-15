@@ -1,26 +1,22 @@
-package test0515.service.impl.QX_06925;
+package test0515.DX002360;
 
 import com.hfr.bean.Detail;
 import com.hfr.dao.DetailDao;
-import com.hfr.webmagic.processor.Processor002;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.model.HttpRequestBody;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.utils.HttpConstant;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class QX_06925_ZhaobGgService implements PageProcessor {
+public class DX002360_ZhaobGgService implements PageProcessor {
     private Site site = Site.me().setSleepTime(3000).setCharset("utf-8");
 
     private static Map<String, Detail> map = new HashMap();
@@ -55,11 +51,9 @@ public class QX_06925_ZhaobGgService implements PageProcessor {
                     String list_time = e.select("span").text();
                     String list_link = "https://www.jinshishi.gov.cn/" + e.select("a").attr("href");
                     String id = list_link.substring(list_link.lastIndexOf("_") + 1);
+
                     System.out.println(id + "-" + list_title + " - " + list_time + " - " + list_link);
-
                     if (detailDao.findDetailById(id) == null) {
-                        System.out.println("++");
-
                         d.setID(id);
                         d.setSOURCE_NAME("津市市财政局");
                         d.setDETAIL_LINK(list_link);
@@ -72,7 +66,6 @@ public class QX_06925_ZhaobGgService implements PageProcessor {
 //                    //添加详情页
                         page.addTargetRequest(list_link);
                     }
-                    System.out.println("+++");
                 }
 
                 //获取总页数
@@ -88,13 +81,13 @@ public class QX_06925_ZhaobGgService implements PageProcessor {
                 //翻页
                 if (pageNum < maxNum) {
                     pageNum++;
-                    page.addTargetRequest("https://www.jinshishi.gov.cn/czj/zhdt/tzgg_" + pageNum);
+//                    page.addTargetRequest("https://www.jinshishi.gov.cn/czj/zhdt/tzgg_" + pageNum);
                 }
             } else {
                 //详情页
                 String id = currentUrl.substring(currentUrl.indexOf("_") + 1);
 
-
+                System.out.println(id + " - ");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +97,7 @@ public class QX_06925_ZhaobGgService implements PageProcessor {
 
     public static void main(String[] args) {
 
-        Spider.create(new QX_06925_ZhaobGgService()).addUrl("https://www.jinshishi.gov.cn/czj/zhdt/tzgg")
+        Spider.create(new DX002360_ZhaobGgService()).addUrl("http://www.sciencep.com/zxzx2017/tzgg2017/")
                 .thread(1)
                 .run();
     }
