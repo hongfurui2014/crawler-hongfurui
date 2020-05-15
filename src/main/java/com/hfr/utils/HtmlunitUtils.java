@@ -12,11 +12,11 @@ public class HtmlunitUtils {
     /**
      * 请求超时时间,默认20000ms
      */
-    private int timeout = 20000;
+    private int timeout = 3000;
     /**
      * 等待异步JS执行时间,默认20000ms
      */
-    private int waitForBackgroundJavaScript = 20000;
+    private int waitForBackgroundJavaScript = 3000;
 
     private static HtmlunitUtils httpUtils;
 
